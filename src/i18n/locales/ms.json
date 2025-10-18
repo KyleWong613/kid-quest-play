@@ -114,8 +114,9 @@
     "emailPlaceholder": "emel.anda@contoh.com",
     "address": "Alamat",
     "addressPlaceholder": "Masukkan alamat anda",
-    "avatar": "URL Avatar",
+    "avatar": "Avatar",
     "avatarPlaceholder": "https://example.com/avatar.jpg",
+    "avatarHelp": "Muat naik imej (maksimum 2MB)",
     "appearance": "Penampilan",
     "theme": "Tema",
     "themeDesc": "Pilih tema pilihan anda",
@@ -125,7 +126,20 @@
     "saving": "Menyimpan...",
     "saved": "Tetapan berjaya disimpan!",
     "errorLoading": "Gagal memuatkan profil",
-    "errorSaving": "Gagal menyimpan tetapan"
+    "errorSaving": "Gagal menyimpan tetapan",
+    "fileTooLarge": "Fail terlalu besar. Saiz maksimum ialah 2MB",
+    "invalidFileType": "Jenis fail tidak sah. Sila muat naik imej",
+    "errorUploadingAvatar": "Gagal memuat naik avatar"
+  },
+  "calendar": {
+    "title": "Penjejak Skor Harian",
+    "dailyScores": "Skor Harian",
+    "selectDate": "Pilih tarikh",
+    "selectChild": "Pilih kanak-kanak",
+    "pleaseSelect": "Sila pilih kanak-kanak untuk melihat skor mereka",
+    "averageScore": "Skor Purata",
+    "noScores": "Tiada skor direkodkan untuk tarikh ini",
+    "errorLoading": "Gagal memuatkan skor"
   },
   "nav": {
     "home": "Laman Utama",

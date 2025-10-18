@@ -114,8 +114,9 @@
     "emailPlaceholder": "your.email@example.com",
     "address": "Address",
     "addressPlaceholder": "Enter your address",
-    "avatar": "Avatar URL",
+    "avatar": "Avatar",
     "avatarPlaceholder": "https://example.com/avatar.jpg",
+    "avatarHelp": "Upload an image (max 2MB)",
     "appearance": "Appearance",
     "theme": "Theme",
     "themeDesc": "Choose your preferred theme",
@@ -125,7 +126,20 @@
     "saving": "Saving...",
     "saved": "Settings saved successfully!",
     "errorLoading": "Failed to load profile",
-    "errorSaving": "Failed to save settings"
+    "errorSaving": "Failed to save settings",
+    "fileTooLarge": "File is too large. Maximum size is 2MB",
+    "invalidFileType": "Invalid file type. Please upload an image",
+    "errorUploadingAvatar": "Failed to upload avatar"
+  },
+  "calendar": {
+    "title": "Daily Score Tracker",
+    "dailyScores": "Daily Scores",
+    "selectDate": "Select a date",
+    "selectChild": "Select a child",
+    "pleaseSelect": "Please select a child to view their scores",
+    "averageScore": "Average Score",
+    "noScores": "No scores recorded for this date",
+    "errorLoading": "Failed to load scores"
   },
   "nav": {
     "home": "Home",

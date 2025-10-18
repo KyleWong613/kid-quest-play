@@ -7,6 +7,14 @@ import { Card } from "@/components/ui/card";
 import { Plus, User } from "lucide-react";
 import { toast } from "sonner";
 import CreateChildDialog from "@/components/CreateChildDialog";
+import ScoreCalendar from "@/components/ScoreCalendar";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 interface Child {
   id: string;
@@ -29,6 +37,7 @@ const Dashboard = () => {
   const [badges, setBadges] = useState<Badge[]>([]);
   const [loading, setLoading] = useState(true);
   const [showCreateDialog, setShowCreateDialog] = useState(false);
+  const [selectedChildForCalendar, setSelectedChildForCalendar] = useState<string>("");
 
   useEffect(() => {
     checkAuth();
@@ -179,8 +188,36 @@ const Dashboard = () => {
         </Card>
       </div>
 
+      {children.length > 0 && (
+        <div className="mt-6 max-w-6xl mx-auto">
+          <Card className="p-6 bg-white/80 backdrop-blur-sm shadow-card border-0 mb-6">
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-2xl font-bold text-foreground">{t('calendar.title')}</h2>
+              <Select value={selectedChildForCalendar} onValueChange={setSelectedChildForCalendar}>
+                <SelectTrigger className="w-[200px]">
+                  <SelectValue placeholder={t('calendar.selectChild')} />
+                </SelectTrigger>
+                <SelectContent>
+                  {children.map((child) => (
+                    <SelectItem key={child.id} value={child.id}>
+                      {getMascotEmoji(child.mascot_id)} {child.name}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+            {selectedChildForCalendar && (
+              <ScoreCalendar childId={selectedChildForCalendar} />
+            )}
+            {!selectedChildForCalendar && (
+              <p className="text-muted-foreground text-center py-8">{t('calendar.pleaseSelect')}</p>
+            )}
+          </Card>
+        </div>
+      )}
+
       {badges.length > 0 && (
-        <Card className="mt-6 p-6 bg-white/80 backdrop-blur-sm shadow-card border-0">
+        <Card className="mt-6 p-6 bg-white/80 backdrop-blur-sm shadow-card border-0 max-w-6xl mx-auto">
           <h2 className="text-2xl font-bold text-foreground mb-4">{t('dashboard.recentBadges')}</h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {badges.slice(0, 8).map((badge) => (

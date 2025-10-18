@@ -114,8 +114,9 @@
     "emailPlaceholder": "your.email@example.com",
     "address": "地址",
     "addressPlaceholder": "输入您的地址",
-    "avatar": "头像URL",
+    "avatar": "头像",
     "avatarPlaceholder": "https://example.com/avatar.jpg",
+    "avatarHelp": "上传图片（最大2MB）",
     "appearance": "外观",
     "theme": "主题",
     "themeDesc": "选择您喜欢的主题",
@@ -125,7 +126,20 @@
     "saving": "保存中...",
     "saved": "设置保存成功！",
     "errorLoading": "加载个人资料失败",
-    "errorSaving": "保存设置失败"
+    "errorSaving": "保存设置失败",
+    "fileTooLarge": "文件太大。最大大小为2MB",
+    "invalidFileType": "文件类型无效。请上传图片",
+    "errorUploadingAvatar": "上传头像失败"
+  },
+  "calendar": {
+    "title": "每日分数追踪器",
+    "dailyScores": "每日分数",
+    "selectDate": "选择日期",
+    "selectChild": "选择孩子",
+    "pleaseSelect": "请选择一个孩子查看他们的分数",
+    "averageScore": "平均分数",
+    "noScores": "此日期没有记录分数",
+    "errorLoading": "加载分数失败"
   },
   "nav": {
     "home": "主页",

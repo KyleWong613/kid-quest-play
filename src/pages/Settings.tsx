@@ -56,7 +56,10 @@ const Settings = () => {
       if (error) throw error;
 
       if (data) {
-        setProfile(data);
+        setProfile({
+          ...data,
+          email: session.user.email || data.email // Load email from auth session
+        });
         if (data.theme) {
           setTheme(data.theme);
         }
@@ -66,6 +69,35 @@ const Settings = () => {
       toast.error(t('settings.errorLoading'));
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleAvatarUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    // Check file size (max 2MB)
+    if (file.size > 2 * 1024 * 1024) {
+      toast.error(t('settings.fileTooLarge'));
+      return;
+    }
+
+    // Check file type
+    if (!file.type.startsWith('image/')) {
+      toast.error(t('settings.invalidFileType'));
+      return;
+    }
+
+    try {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        const base64 = event.target?.result as string;
+        setProfile({ ...profile, avatar_url: base64 });
+      };
+      reader.readAsDataURL(file);
+    } catch (error) {
+      console.error('Error uploading avatar:', error);
+      toast.error(t('settings.errorUploadingAvatar'));
     }
   };
 
@@ -174,11 +206,12 @@ const Settings = () => {
                   <Label htmlFor="avatar" className="text-foreground font-semibold">{t('settings.avatar')}</Label>
                   <Input
                     id="avatar"
-                    value={profile.avatar_url || ''}
-                    onChange={(e) => setProfile({ ...profile, avatar_url: e.target.value })}
-                    placeholder={t('settings.avatarPlaceholder')}
+                    type="file"
+                    accept="image/*"
+                    onChange={handleAvatarUpload}
                     className="rounded-2xl mt-2"
                   />
+                  <p className="text-xs text-muted-foreground mt-1">{t('settings.avatarHelp')}</p>
                   {profile.avatar_url && (
                     <div className="mt-4">
                       <img 
