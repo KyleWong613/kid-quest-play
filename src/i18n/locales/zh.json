@@ -103,5 +103,32 @@
     "send": "发送消息",
     "messageSent": "谢谢！我们会尽快回复您。",
     "alternative": "或直接发送电子邮件至："
+  },
+  "settings": {
+    "title": "设置",
+    "subtitle": "管理您的帐户偏好",
+    "personalInfo": "个人信息",
+    "name": "姓名",
+    "namePlaceholder": "输入您的姓名",
+    "email": "电子邮件",
+    "emailPlaceholder": "your.email@example.com",
+    "address": "地址",
+    "addressPlaceholder": "输入您的地址",
+    "avatar": "头像URL",
+    "avatarPlaceholder": "https://example.com/avatar.jpg",
+    "appearance": "外观",
+    "theme": "主题",
+    "themeDesc": "选择您喜欢的主题",
+    "lightMode": "浅色模式",
+    "darkMode": "深色模式",
+    "save": "保存更改",
+    "saving": "保存中...",
+    "saved": "设置保存成功！",
+    "errorLoading": "加载个人资料失败",
+    "errorSaving": "保存设置失败"
+  },
+  "nav": {
+    "home": "主页",
+    "dashboard": "仪表板"
   }
 }

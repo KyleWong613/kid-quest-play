@@ -103,5 +103,32 @@
     "send": "Send Message",
     "messageSent": "Thank you! We'll get back to you soon.",
     "alternative": "Or email us directly at:"
+  },
+  "settings": {
+    "title": "Settings",
+    "subtitle": "Manage your account preferences",
+    "personalInfo": "Personal Information",
+    "name": "Name",
+    "namePlaceholder": "Enter your name",
+    "email": "Email",
+    "emailPlaceholder": "your.email@example.com",
+    "address": "Address",
+    "addressPlaceholder": "Enter your address",
+    "avatar": "Avatar URL",
+    "avatarPlaceholder": "https://example.com/avatar.jpg",
+    "appearance": "Appearance",
+    "theme": "Theme",
+    "themeDesc": "Choose your preferred theme",
+    "lightMode": "Light Mode",
+    "darkMode": "Dark Mode",
+    "save": "Save Changes",
+    "saving": "Saving...",
+    "saved": "Settings saved successfully!",
+    "errorLoading": "Failed to load profile",
+    "errorSaving": "Failed to save settings"
+  },
+  "nav": {
+    "home": "Home",
+    "dashboard": "Dashboard"
   }
 }

@@ -103,5 +103,32 @@
     "send": "Hantar Mesej",
     "messageSent": "Terima kasih! Kami akan menghubungi anda tidak lama lagi.",
     "alternative": "Atau e-melkan kami terus di:"
+  },
+  "settings": {
+    "title": "Tetapan",
+    "subtitle": "Urus keutamaan akaun anda",
+    "personalInfo": "Maklumat Peribadi",
+    "name": "Nama",
+    "namePlaceholder": "Masukkan nama anda",
+    "email": "E-mel",
+    "emailPlaceholder": "emel.anda@contoh.com",
+    "address": "Alamat",
+    "addressPlaceholder": "Masukkan alamat anda",
+    "avatar": "URL Avatar",
+    "avatarPlaceholder": "https://example.com/avatar.jpg",
+    "appearance": "Penampilan",
+    "theme": "Tema",
+    "themeDesc": "Pilih tema pilihan anda",
+    "lightMode": "Mod Cerah",
+    "darkMode": "Mod Gelap",
+    "save": "Simpan Perubahan",
+    "saving": "Menyimpan...",
+    "saved": "Tetapan berjaya disimpan!",
+    "errorLoading": "Gagal memuatkan profil",
+    "errorSaving": "Gagal menyimpan tetapan"
+  },
+  "nav": {
+    "home": "Laman Utama",
+    "dashboard": "Papan Pemuka"
   }
 }
