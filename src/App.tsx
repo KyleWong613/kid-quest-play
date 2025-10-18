@@ -14,6 +14,7 @@ import MathGames from "./pages/MathGames";
 import Certificates from "./pages/Certificates";
 import LanguageLearning from "./pages/LanguageLearning";
 import Quizes from "./pages/Quizes";
+import About from "./pages/About";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -37,6 +38,7 @@ const App = () => (
               <Route path="/language-learning/:childId" element={<LanguageLearning />} />
               <Route path="/quizes/:childId" element={<Quizes />} />
               <Route path="/certificates/:childId" element={<Certificates />} />
+              <Route path="/about" element={<About />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>
