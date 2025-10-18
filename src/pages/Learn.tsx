@@ -170,7 +170,7 @@ const Learn = () => {
         </Card>
 
         {/* Quick Actions - Minimalist Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
           <Card 
             className="group hover:shadow-md transition-all cursor-pointer border-0 bg-white/80 backdrop-blur-sm animate-fade-in"
             onClick={() => navigate(`/ai-tutor/${childId}`)}
@@ -203,6 +203,21 @@ const Learn = () => {
           <Card 
             className="group hover:shadow-md transition-all cursor-pointer border-0 bg-white/80 backdrop-blur-sm animate-fade-in" 
             style={{ animationDelay: "0.1s" }}
+            onClick={() => navigate(`/storytelling/${childId}`)}
+          >
+            <div className="p-6 flex items-center gap-4">
+              <div className="text-4xl">📖</div>
+              <div className="flex-1">
+                <h3 className="text-lg font-semibold text-foreground mb-1">Story Time</h3>
+                <p className="text-xs text-muted-foreground">Learn through stories</p>
+              </div>
+              <ChevronRight className="w-5 h-5 text-muted-foreground group-hover:text-warning transition-colors" />
+            </div>
+          </Card>
+
+          <Card 
+            className="group hover:shadow-md transition-all cursor-pointer border-0 bg-white/80 backdrop-blur-sm animate-fade-in" 
+            style={{ animationDelay: "0.15s" }}
             onClick={() => navigate(`/certificates/${childId}`)}
           >
             <div className="p-6 flex items-center gap-4">

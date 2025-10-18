@@ -16,6 +16,7 @@ import Certificates from "./pages/Certificates";
 import LanguageLearning from "./pages/LanguageLearning";
 import Quizes from "./pages/Quizes";
 import LessonView from "./pages/LessonView";
+import Storytelling from "./pages/Storytelling";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Settings from "./pages/Settings";
@@ -43,6 +44,7 @@ const App = () => (
                 <Route path="/language-learning/:childId" element={<LanguageLearning />} />
                 <Route path="/quizes/:childId" element={<Quizes />} />
                 <Route path="/certificates/:childId" element={<Certificates />} />
+                <Route path="/storytelling/:childId" element={<Storytelling />} />
                 <Route path="/lesson/:childId/:lessonId" element={<LessonView />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/contact" element={<Contact />} />
