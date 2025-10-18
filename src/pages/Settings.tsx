@@ -10,6 +10,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { ArrowLeft, User, Moon, Sun } from 'lucide-react';
 import { toast } from 'sonner';
 import { useTheme } from 'next-themes';
+import { z } from 'zod';
 
 interface Profile {
   id: string;
@@ -19,6 +20,12 @@ interface Profile {
   avatar_url: string | null;
   theme: string | null;
 }
+
+const profileSchema = z.object({
+  name: z.string().trim().max(100, "Name must be less than 100 characters").nullable(),
+  email: z.string().trim().email("Invalid email address").max(255, "Email must be less than 255 characters").nullable(),
+  address: z.string().trim().max(500, "Address must be less than 500 characters").nullable(),
+});
 
 const Settings = () => {
   const { t } = useTranslation();
@@ -102,6 +109,19 @@ const Settings = () => {
   };
 
   const handleSave = async () => {
+    // Validate input with zod
+    const result = profileSchema.safeParse({
+      name: profile.name,
+      email: profile.email,
+      address: profile.address,
+    });
+
+    if (!result.success) {
+      const errors = result.error.errors.map(err => err.message).join(", ");
+      toast.error(errors);
+      return;
+    }
+
     setSaving(true);
     try {
       const { error } = await supabase

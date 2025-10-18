@@ -1,7 +1,7 @@
 project_id = "kvevivgikaewbwuzwtqb"
 
 [functions.ai-tutor]
-verify_jwt = false
+verify_jwt = true
 
 [functions.generate-story]
-verify_jwt = false
+verify_jwt = true

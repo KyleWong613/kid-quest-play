@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+import { z } from "zod";
 
 const MASCOTS = [
   { id: "dragon", name: "Dragon", emoji: "🐉" },
@@ -14,6 +15,14 @@ const MASCOTS = [
   { id: "fox", name: "Fox", emoji: "🦊" },
   { id: "owl", name: "Owl", emoji: "🦉" },
 ];
+
+const childSchema = z.object({
+  name: z.string().trim().min(1, "Name is required").max(50, "Name must be less than 50 characters"),
+  age: z.number().int().min(3, "Age must be at least 3").max(18, "Age must be at most 18"),
+  mascot_id: z.enum(["dragon", "unicorn", "robot", "panda", "fox", "owl"], {
+    required_error: "Please select a mascot",
+  }),
+});
 
 interface CreateChildDialogProps {
   open: boolean;
@@ -30,14 +39,18 @@ const CreateChildDialog = ({ open, onOpenChange, onChildCreated }: CreateChildDi
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!name || !age || !selectedMascot) {
-      toast.error("Please fill in all fields");
-      return;
-    }
-
     const ageNum = parseInt(age);
-    if (ageNum < 3 || ageNum > 18) {
-      toast.error("Age must be between 3 and 18");
+
+    // Validate input with zod
+    const result = childSchema.safeParse({
+      name: name.trim(),
+      age: ageNum,
+      mascot_id: selectedMascot,
+    });
+
+    if (!result.success) {
+      const errors = result.error.errors.map(err => err.message).join(", ");
+      toast.error(errors);
       return;
     }
 

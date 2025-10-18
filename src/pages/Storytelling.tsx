@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { z } from "zod";
 
 interface Child {
   id: string;
@@ -27,6 +28,13 @@ const subjects = [
   { value: "Math", emoji: "🔢", topics: ["Counting Adventures", "Shape Detective", "Time Travel", "Money Magic"] },
   { value: "Science", emoji: "🔬", topics: ["Water Cycle Journey", "Plant Growth", "Animal Habitats", "Weather Wonders"] },
 ];
+
+const storyRequestSchema = z.object({
+  subject: z.string().min(1, "Please select a subject"),
+  topic: z.string().trim().min(1, "Topic is required").max(100, "Topic must be less than 100 characters"),
+  age: z.number().int().min(3).max(18),
+  childName: z.string().trim().min(1).max(50),
+});
 
 const Storytelling = () => {
   const { childId } = useParams();
@@ -76,8 +84,19 @@ const Storytelling = () => {
   };
 
   const generateStory = async () => {
-    if (!selectedSubject || (!selectedTopic && !customTopic)) {
-      toast.error("Please select a subject and topic");
+    const topic = customTopic || selectedTopic;
+
+    // Validate input with zod
+    const result = storyRequestSchema.safeParse({
+      subject: selectedSubject,
+      topic: topic,
+      age: child?.age,
+      childName: child?.name,
+    });
+
+    if (!result.success) {
+      const errors = result.error.errors.map(err => err.message).join(", ");
+      toast.error(errors);
       return;
     }
 
@@ -85,7 +104,6 @@ const Storytelling = () => {
     setStory("");
 
     try {
-      const topic = customTopic || selectedTopic;
       const { data, error } = await supabase.functions.invoke("generate-story", {
         body: {
           subject: selectedSubject,

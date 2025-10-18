@@ -1,10 +1,20 @@
 import "https://deno.land/x/xhr@0.1.0/mod.ts";
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
+import { z } from "https://deno.land/x/zod@v3.22.4/mod.ts";
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
 };
+
+const requestSchema = z.object({
+  messages: z.array(z.object({
+    role: z.enum(['user', 'assistant', 'system']),
+    content: z.string().max(5000),
+  })).min(1).max(50),
+  childAge: z.number().int().min(3).max(18),
+  subject: z.string().max(100),
+});
 
 serve(async (req) => {
   if (req.method === 'OPTIONS') {
@@ -12,7 +22,19 @@ serve(async (req) => {
   }
 
   try {
-    const { messages, childAge, subject } = await req.json();
+    const body = await req.json();
+    
+    // Validate input
+    const validation = requestSchema.safeParse(body);
+    if (!validation.success) {
+      console.error('Validation error:', validation.error);
+      return new Response(
+        JSON.stringify({ error: 'Invalid request data', details: validation.error.errors }),
+        { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
+
+    const { messages, childAge, subject } = validation.data;
     const LOVABLE_API_KEY = Deno.env.get('LOVABLE_API_KEY');
     
     if (!LOVABLE_API_KEY) {
