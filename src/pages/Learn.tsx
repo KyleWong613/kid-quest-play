@@ -133,7 +133,7 @@ const Learn = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           <Card 
             className="p-8 hover:scale-105 transition-bounce shadow-card border-0 cursor-pointer animate-fade-in"
             onClick={() => navigate(`/ai-tutor/${childId}`)}
@@ -166,6 +166,21 @@ const Learn = () => {
           <Card 
             className="p-8 hover:scale-105 transition-bounce shadow-card border-0 cursor-pointer animate-fade-in" 
             style={{ animationDelay: "0.2s" }}
+            onClick={() => navigate(`/language-learning/${childId}`)}
+          >
+            <div className="text-center">
+              <div className="text-5xl mb-4">🌍</div>
+              <h3 className="text-2xl font-bold text-foreground mb-2">Language Learning</h3>
+              <p className="text-muted-foreground mb-4">Master multiple languages</p>
+              <Button className="w-full gradient-primary text-white border-0 hover:shadow-glow transition-all">
+                Start Learning
+              </Button>
+            </div>
+          </Card>
+
+          <Card 
+            className="p-8 hover:scale-105 transition-bounce shadow-card border-0 cursor-pointer animate-fade-in" 
+            style={{ animationDelay: "0.3s" }}
             onClick={() => navigate(`/certificates/${childId}`)}
           >
             <div className="text-center">
