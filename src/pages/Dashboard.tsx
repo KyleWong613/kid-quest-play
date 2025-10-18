@@ -57,7 +57,7 @@ const Dashboard = () => {
       const { data, error } = await supabase
         .from("children")
         .select("*")
-        .order("created_at", { ascending: true });
+        .order("age", { ascending: true });
 
       if (error) throw error;
       setChildren(data || []);

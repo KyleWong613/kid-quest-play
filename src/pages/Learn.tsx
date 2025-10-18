@@ -3,7 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { ArrowLeft, Star, Trophy, BookOpen } from "lucide-react";
+import { ArrowLeft, Star, Trophy, BookOpen, ChevronRight, Calendar } from "lucide-react";
 import { toast } from "sonner";
 
 interface Child {
@@ -17,11 +17,20 @@ interface Points {
   total_points: number;
 }
 
+interface Lesson {
+  id: string;
+  title: string;
+  subject: string;
+  level: number;
+  story_content: string;
+}
+
 const Learn = () => {
   const { childId } = useParams();
   const navigate = useNavigate();
   const [child, setChild] = useState<Child | null>(null);
   const [points, setPoints] = useState<Points | null>(null);
+  const [lessons, setLessons] = useState<Lesson[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -49,6 +58,18 @@ const Learn = () => {
 
       if (pointsError) throw pointsError;
       setPoints(pointsData);
+
+      // Fetch age-appropriate lessons
+      const ageToLevel = Math.min(Math.ceil(childData.age / 3), 10);
+      const { data: lessonsData, error: lessonsError } = await supabase
+        .from("lessons")
+        .select("*")
+        .lte("level", ageToLevel)
+        .gte("level", Math.max(1, ageToLevel - 2))
+        .order("level", { ascending: true });
+
+      if (lessonsError) throw lessonsError;
+      setLessons(lessonsData || []);
     } catch (error) {
       console.error("Error fetching data:", error);
       toast.error("Failed to load learner data");
@@ -85,98 +106,155 @@ const Learn = () => {
     );
   }
 
+  const getSubjectColor = (subject: string) => {
+    const colors: { [key: string]: string } = {
+      Math: "from-primary/20 to-primary/10 border-primary/30",
+      Science: "from-success/20 to-success/10 border-success/30",
+      Reading: "from-fun/20 to-fun/10 border-fun/30",
+      History: "from-warning/20 to-warning/10 border-warning/30",
+    };
+    return colors[subject] || "from-primary/20 to-primary/10 border-primary/30";
+  };
+
   return (
-    <div className="min-h-screen gradient-primary p-4 md:p-8">
-      <div className="max-w-6xl mx-auto">
-        <Button
-          onClick={() => navigate("/dashboard")}
-          variant="secondary"
-          className="mb-6 rounded-full hover:scale-105 transition-bounce"
-        >
-          <ArrowLeft className="mr-2 h-4 w-4" />
-          Back to Dashboard
-        </Button>
-
-        <div className="bg-white rounded-3xl p-6 md:p-8 mb-8 shadow-card animate-fade-in">
-          <div className="flex items-center gap-6 mb-6">
-            <div className="text-6xl animate-float">{getMascotEmoji(child.mascot_id)}</div>
-            <div>
-              <h1 className="text-4xl font-black text-foreground mb-2">{child.name}'s Learning Adventure</h1>
-              <p className="text-xl text-muted-foreground">Age {child.age}</p>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <Card className="p-6 bg-gradient-to-br from-primary/10 to-primary/5 border-0">
-              <div className="flex items-center gap-3 mb-2">
-                <Star className="w-6 h-6 text-primary" />
-                <h3 className="text-lg font-bold text-foreground">Points</h3>
-              </div>
-              <p className="text-4xl font-black text-primary">{points?.total_points || 0}</p>
-            </Card>
-
-            <Card className="p-6 bg-gradient-to-br from-success/10 to-success/5 border-0">
-              <div className="flex items-center gap-3 mb-2">
-                <Trophy className="w-6 h-6 text-success" />
-                <h3 className="text-lg font-bold text-foreground">Badges</h3>
-              </div>
-              <p className="text-4xl font-black text-success">0</p>
-            </Card>
-
-            <Card className="p-6 bg-gradient-to-br from-fun/10 to-fun/5 border-0">
-              <div className="flex items-center gap-3 mb-2">
-                <BookOpen className="w-6 h-6 text-fun" />
-                <h3 className="text-lg font-bold text-foreground">Lessons</h3>
-              </div>
-              <p className="text-4xl font-black text-fun">0</p>
-            </Card>
-          </div>
+    <div className="min-h-screen bg-gradient-to-br from-primary/5 via-background to-fun/5">
+      <div className="max-w-7xl mx-auto p-4 md:p-6">
+        {/* Breadcrumb Navigation */}
+        <div className="flex items-center gap-2 text-sm text-muted-foreground mb-6 animate-fade-in">
+          <button 
+            onClick={() => navigate("/dashboard")}
+            className="flex items-center gap-2 hover:text-primary transition-colors"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            <span className="font-medium">Dashboard</span>
+          </button>
+          <ChevronRight className="w-4 h-4" />
+          <span className="font-semibold text-foreground">{child.name}</span>
+          <ChevronRight className="w-4 h-4" />
+          <span className="text-muted-foreground">Learning</span>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {/* Header Card - Minimalist */}
+        <Card className="mb-6 border-0 shadow-sm bg-white/80 backdrop-blur-sm animate-fade-in">
+          <div className="p-6">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-4">
+                <div className="text-5xl">{getMascotEmoji(child.mascot_id)}</div>
+                <div>
+                  <h1 className="text-3xl font-bold text-foreground">{child.name}</h1>
+                  <p className="text-sm text-muted-foreground">Age {child.age}</p>
+                </div>
+              </div>
+              
+              <div className="flex gap-3">
+                <div className="text-center px-4 py-2 rounded-xl bg-gradient-to-br from-primary/10 to-primary/5">
+                  <Star className="w-5 h-5 text-primary mx-auto mb-1" />
+                  <p className="text-2xl font-bold text-primary">{points?.total_points || 0}</p>
+                  <p className="text-xs text-muted-foreground">Points</p>
+                </div>
+                <div className="text-center px-4 py-2 rounded-xl bg-gradient-to-br from-fun/10 to-fun/5">
+                  <BookOpen className="w-5 h-5 text-fun mx-auto mb-1" />
+                  <p className="text-2xl font-bold text-fun">{lessons.length}</p>
+                  <p className="text-xs text-muted-foreground">Lessons</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </Card>
+
+        {/* Quick Actions - Minimalist Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
           <Card 
-            className="p-8 hover:scale-105 transition-bounce shadow-card border-0 cursor-pointer animate-fade-in"
+            className="group hover:shadow-md transition-all cursor-pointer border-0 bg-white/80 backdrop-blur-sm animate-fade-in"
             onClick={() => navigate(`/ai-tutor/${childId}`)}
           >
-            <div className="text-center">
-              <div className="text-5xl mb-4">🤖</div>
-              <h3 className="text-2xl font-bold text-foreground mb-2">AI Tutor</h3>
-              <p className="text-muted-foreground mb-4">Ask questions and learn anything</p>
-              <Button className="w-full gradient-primary text-white border-0 hover:shadow-glow transition-all">
-                Chat Now
-              </Button>
+            <div className="p-6 flex items-center gap-4">
+              <div className="text-4xl">🤖</div>
+              <div className="flex-1">
+                <h3 className="text-lg font-semibold text-foreground mb-1">AI Tutor</h3>
+                <p className="text-xs text-muted-foreground">Get instant help</p>
+              </div>
+              <ChevronRight className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
             </div>
           </Card>
 
           <Card 
-            className="p-8 hover:scale-105 transition-bounce shadow-card border-0 cursor-pointer animate-fade-in" 
-            style={{ animationDelay: "0.1s" }}
+            className="group hover:shadow-md transition-all cursor-pointer border-0 bg-white/80 backdrop-blur-sm animate-fade-in" 
+            style={{ animationDelay: "0.05s" }}
             onClick={() => navigate(`/quizes/${childId}`)}
           >
-            <div className="text-center">
-              <div className="text-5xl mb-4">📝</div>
-              <h3 className="text-2xl font-bold text-foreground mb-2">Quizes</h3>
-              <p className="text-muted-foreground mb-4">Test your knowledge on various topics</p>
-              <Button className="w-full gradient-fun text-white border-0 hover:shadow-glow transition-all">
-                Take Quiz
-              </Button>
+            <div className="p-6 flex items-center gap-4">
+              <div className="text-4xl">📝</div>
+              <div className="flex-1">
+                <h3 className="text-lg font-semibold text-foreground mb-1">Quizzes</h3>
+                <p className="text-xs text-muted-foreground">Test knowledge</p>
+              </div>
+              <ChevronRight className="w-5 h-5 text-muted-foreground group-hover:text-fun transition-colors" />
             </div>
           </Card>
 
           <Card 
-            className="p-8 hover:scale-105 transition-bounce shadow-card border-0 cursor-pointer animate-fade-in" 
-            style={{ animationDelay: "0.3s" }}
+            className="group hover:shadow-md transition-all cursor-pointer border-0 bg-white/80 backdrop-blur-sm animate-fade-in" 
+            style={{ animationDelay: "0.1s" }}
             onClick={() => navigate(`/certificates/${childId}`)}
           >
-            <div className="text-center">
-              <div className="text-5xl mb-4">🏆</div>
-              <h3 className="text-2xl font-bold text-foreground mb-2">Certificates</h3>
-              <p className="text-muted-foreground mb-4">View and download achievements</p>
-              <Button className="w-full gradient-success text-white border-0 hover:shadow-glow transition-all">
-                View All
-              </Button>
+            <div className="p-6 flex items-center gap-4">
+              <div className="text-4xl">🏆</div>
+              <div className="flex-1">
+                <h3 className="text-lg font-semibold text-foreground mb-1">Certificates</h3>
+                <p className="text-xs text-muted-foreground">View achievements</p>
+              </div>
+              <ChevronRight className="w-5 h-5 text-muted-foreground group-hover:text-success transition-colors" />
             </div>
           </Card>
+        </div>
+
+        {/* Lessons Section */}
+        <div className="animate-fade-in" style={{ animationDelay: "0.15s" }}>
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-2xl font-bold text-foreground">Available Lessons</h2>
+            <span className="text-sm text-muted-foreground">Level {Math.min(Math.ceil(child.age / 3), 10)}</span>
+          </div>
+
+          {lessons.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {lessons.map((lesson, index) => (
+                <Card
+                  key={lesson.id}
+                  className={`group hover:shadow-lg transition-all cursor-pointer border bg-gradient-to-br ${getSubjectColor(lesson.subject)} animate-fade-in`}
+                  style={{ animationDelay: `${0.2 + index * 0.05}s` }}
+                >
+                  <div className="p-6">
+                    <div className="flex items-start justify-between mb-3">
+                      <span className="text-xs font-semibold px-3 py-1 rounded-full bg-white/80 text-primary">
+                        {lesson.subject}
+                      </span>
+                      <span className="text-xs text-muted-foreground">Level {lesson.level}</span>
+                    </div>
+                    <h3 className="text-lg font-bold text-foreground mb-2 group-hover:text-primary transition-colors">
+                      {lesson.title}
+                    </h3>
+                    <p className="text-sm text-muted-foreground line-clamp-2 mb-4">
+                      {lesson.story_content.substring(0, 100)}...
+                    </p>
+                    <Button 
+                      variant="ghost" 
+                      size="sm" 
+                      className="w-full hover:bg-white/50 transition-colors"
+                    >
+                      Start Lesson
+                      <ChevronRight className="w-4 h-4 ml-2" />
+                    </Button>
+                  </div>
+                </Card>
+              ))}
+            </div>
+          ) : (
+            <Card className="p-12 text-center border-0 bg-white/50 backdrop-blur-sm">
+              <BookOpen className="w-16 h-16 text-muted-foreground/50 mx-auto mb-4" />
+              <p className="text-muted-foreground">No lessons available yet</p>
+            </Card>
+          )}
         </div>
       </div>
     </div>
