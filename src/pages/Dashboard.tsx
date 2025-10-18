@@ -29,6 +29,10 @@ interface Badge {
   badge_type: string;
   earned_at: string;
   child_id: string;
+  children?: {
+    name: string;
+    mascot_id: string;
+  };
 }
 
 const Dashboard = () => {
@@ -75,7 +79,13 @@ const Dashboard = () => {
     try {
       const { data, error } = await supabase
         .from("badges")
-        .select("*")
+        .select(`
+          *,
+          children (
+            name,
+            mascot_id
+          )
+        `)
         .order("earned_at", { ascending: false });
 
       if (error) throw error;
@@ -248,7 +258,13 @@ const Dashboard = () => {
             {badges.slice(0, 8).map((badge) => (
               <div key={badge.id} className="p-4 rounded-2xl bg-gradient-to-br from-primary/10 to-fun/10 text-center">
                 <div className="text-4xl mb-2">{getBadgeEmoji(badge.badge_type)}</div>
-                <p className="text-sm font-bold text-foreground">{badge.badge_name}</p>
+                <p className="text-sm font-bold text-foreground mb-1">{badge.badge_name}</p>
+                {badge.children && (
+                  <p className="text-xs text-muted-foreground flex items-center justify-center gap-1">
+                    <span>{getMascotEmoji(badge.children.mascot_id)}</span>
+                    <span>{badge.children.name}</span>
+                  </p>
+                )}
               </div>
             ))}
           </div>
