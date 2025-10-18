@@ -171,7 +171,8 @@ const MathGames = () => {
     if (!currentQuestion || !child) return;
 
     const isCorrect = selectedAnswer === currentQuestion.answer;
-    setQuestionsAnswered(prev => prev + 1);
+    const newQuestionsAnswered = questionsAnswered + 1;
+    setQuestionsAnswered(newQuestionsAnswered);
 
     if (isCorrect) {
       const newScore = score + 10;
@@ -188,7 +189,7 @@ const MathGames = () => {
       ];
       toast.success(feedbacks[Math.floor(Math.random() * feedbacks.length)]);
 
-      // Update points and award badge for 10 correct answers
+      // Update points in real-time
       try {
         const { data: pointsData } = await supabase
           .from("points")
@@ -199,8 +200,59 @@ const MathGames = () => {
         if (pointsData) {
           await supabase
             .from("points")
-            .update({ total_points: pointsData.total_points + 10 })
+            .update({ 
+              total_points: pointsData.total_points + 10,
+              updated_at: new Date().toISOString()
+            })
             .eq("child_id", childId);
+        }
+
+        // Record progress after every 5 questions or game completion
+        if (newQuestionsAnswered % 5 === 0 || newQuestionsAnswered >= 10) {
+          // Get or create a math challenge lesson
+          let lessonId = null;
+          const { data: lessons } = await supabase
+            .from("lessons")
+            .select("id")
+            .eq("subject", "Math")
+            .eq("title", "Math Challenge")
+            .maybeSingle();
+
+          if (lessons) {
+            lessonId = lessons.id;
+          } else {
+            // Create a generic math challenge lesson
+            const { data: newLesson } = await supabase
+              .from("lessons")
+              .insert({
+                title: "Math Challenge",
+                subject: "Math",
+                level: Math.min(Math.ceil(child.age / 3), 10),
+                story_content: "Interactive math challenge with various difficulty levels",
+                questions: []
+              })
+              .select("id")
+              .single();
+            
+            if (newLesson) lessonId = newLesson.id;
+          }
+
+          if (lessonId) {
+            const scorePercentage = Math.round((newScore / (newQuestionsAnswered * 10)) * 100);
+            
+            // Insert or update progress
+            await supabase
+              .from("progress")
+              .upsert({
+                child_id: childId,
+                lesson_id: lessonId,
+                score: scorePercentage,
+                completed: newQuestionsAnswered >= 10,
+                completion_time: new Date().toISOString()
+              }, {
+                onConflict: 'child_id,lesson_id'
+              });
+          }
         }
 
         // Award Fast Learner certificate badge after 10 correct answers

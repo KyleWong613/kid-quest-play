@@ -24,6 +24,28 @@ const ScoreCalendar = ({ childId }: ScoreCalendarProps) => {
 
   useEffect(() => {
     fetchScores();
+    
+    // Set up real-time subscription for progress updates
+    const channel = supabase
+      .channel(`progress-${childId}`)
+      .on(
+        'postgres_changes',
+        {
+          event: '*',
+          schema: 'public',
+          table: 'progress',
+          filter: `child_id=eq.${childId}`
+        },
+        (payload) => {
+          console.log('Real-time progress update:', payload);
+          fetchScores(); // Refresh scores when progress updates
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
   }, [childId]);
 
   const fetchScores = async () => {
@@ -100,21 +122,6 @@ const ScoreCalendar = ({ childId }: ScoreCalendarProps) => {
                   fontWeight: 'bold',
                   backgroundColor: 'hsl(var(--primary) / 0.2)',
                   borderRadius: '0.5rem'
-                }
-              }}
-              components={{
-                Day: ({ date, ...props }) => {
-                  const dayScore = getDayScore(date);
-                  return (
-                    <div className="relative">
-                      <button {...props as any} />
-                      {dayScore !== null && (
-                        <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 text-xs font-bold text-primary">
-                          {dayScore}
-                        </div>
-                      )}
-                    </div>
-                  );
                 }
               }}
             />
