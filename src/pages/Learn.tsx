@@ -223,6 +223,7 @@ const Learn = () => {
                   key={lesson.id}
                   className={`group hover:shadow-lg transition-all cursor-pointer border bg-gradient-to-br ${getSubjectColor(lesson.subject)} animate-fade-in`}
                   style={{ animationDelay: `${0.2 + index * 0.05}s` }}
+                  onClick={() => navigate(`/lesson/${child.id}/${lesson.id}`)}
                 >
                   <div className="p-6">
                     <div className="flex items-start justify-between mb-3">
