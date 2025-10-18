@@ -60,12 +60,14 @@ const Learn = () => {
       setPoints(pointsData);
 
       // Fetch age-appropriate lessons
-      const ageToLevel = Math.min(Math.ceil(childData.age / 3), 10);
+      // For older learners (age 15+), use age as level; for younger, divide by 3
+      const ageToLevel = childData.age >= 15 ? childData.age : Math.min(Math.ceil(childData.age / 3), 10);
+      const levelRange = childData.age >= 15 ? 3 : 2;
       const { data: lessonsData, error: lessonsError } = await supabase
         .from("lessons")
         .select("*")
         .lte("level", ageToLevel)
-        .gte("level", Math.max(1, ageToLevel - 2))
+        .gte("level", Math.max(1, ageToLevel - levelRange))
         .order("level", { ascending: true });
 
       if (lessonsError) throw lessonsError;
@@ -112,6 +114,11 @@ const Learn = () => {
       Science: "from-success/20 to-success/10 border-success/30",
       Reading: "from-fun/20 to-fun/10 border-fun/30",
       History: "from-warning/20 to-warning/10 border-warning/30",
+      Algebra: "from-primary/20 to-primary/10 border-primary/30",
+      "US History": "from-warning/20 to-warning/10 border-warning/30",
+      Biology: "from-success/20 to-success/10 border-success/30",
+      Chemistry: "from-success/20 to-success/10 border-success/30",
+      Physics: "from-primary/20 to-primary/10 border-primary/30",
     };
     return colors[subject] || "from-primary/20 to-primary/10 border-primary/30";
   };
@@ -213,7 +220,9 @@ const Learn = () => {
         <div className="animate-fade-in" style={{ animationDelay: "0.15s" }}>
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-2xl font-bold text-foreground">Available Lessons</h2>
-            <span className="text-sm text-muted-foreground">Level {Math.min(Math.ceil(child.age / 3), 10)}</span>
+            <span className="text-sm text-muted-foreground">
+              Level {child.age >= 15 ? child.age : Math.min(Math.ceil(child.age / 3), 10)}
+            </span>
           </div>
 
           {lessons.length > 0 ? (
