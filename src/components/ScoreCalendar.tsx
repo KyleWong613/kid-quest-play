@@ -64,13 +64,21 @@ const ScoreCalendar = ({ childId }: ScoreCalendarProps) => {
 
       if (error) throw error;
 
+      console.log('Fetched scores data:', data); // Debug log
+
       const scoreData: ScoreData[] = (data || []).map((item: any) => ({
         date: new Date(item.completion_time),
         score: item.score,
         lesson_title: item.lessons?.title || 'Unknown Lesson'
       }));
 
+      console.log('Processed score data:', scoreData); // Debug log
       setScores(scoreData);
+      
+      // Auto-select the most recent score date
+      if (scoreData.length > 0) {
+        setSelectedDate(scoreData[0].date);
+      }
     } catch (error) {
       console.error('Error fetching scores:', error);
       toast.error(t('calendar.errorLoading'));
@@ -105,6 +113,15 @@ const ScoreCalendar = ({ childId }: ScoreCalendarProps) => {
 
   return (
     <div className="space-y-4">
+      {/* Debug Info */}
+      {scores.length > 0 && (
+        <div className="p-3 rounded-lg bg-success/10 border border-success/20">
+          <p className="text-sm font-semibold text-success">
+            ✓ {scores.length} score{scores.length !== 1 ? 's' : ''} loaded! Click on highlighted dates to view details.
+          </p>
+        </div>
+      )}
+      
       <Card className="p-6 border-0 bg-gradient-to-br from-primary/5 to-fun/5">
         <h3 className="text-xl font-bold text-foreground mb-4">{t('calendar.dailyScores')}</h3>
         <div className="flex flex-col lg:flex-row gap-6">
@@ -113,7 +130,7 @@ const ScoreCalendar = ({ childId }: ScoreCalendarProps) => {
               mode="single"
               selected={selectedDate}
               onSelect={setSelectedDate}
-              className="rounded-2xl border"
+              className="rounded-2xl border bg-white"
               modifiers={{
                 scored: scores.map(s => s.date)
               }}
@@ -125,6 +142,9 @@ const ScoreCalendar = ({ childId }: ScoreCalendarProps) => {
                 }
               }}
             />
+            <div className="mt-3 text-xs text-muted-foreground text-center">
+              Dates with scores are highlighted
+            </div>
           </div>
           
           <div className="flex-1">
@@ -146,7 +166,7 @@ const ScoreCalendar = ({ childId }: ScoreCalendarProps) => {
                             {format(score.date, 'h:mm a')}
                           </p>
                         </div>
-                        <div className="text-2xl font-black text-primary">{score.score}</div>
+                        <div className="text-2xl font-black text-primary">{score.score}%</div>
                       </div>
                     </div>
                   ))}
@@ -157,7 +177,7 @@ const ScoreCalendar = ({ childId }: ScoreCalendarProps) => {
                         {Math.round(
                           selectedDateScores.reduce((sum, s) => sum + s.score, 0) /
                             selectedDateScores.length
-                        )}
+                        )}%
                       </span>
                     </div>
                   </div>
