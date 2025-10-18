@@ -1,0 +1,45 @@
+{
+  "header": {
+    "language": "语言"
+  },
+  "footer": {
+    "about": "关于",
+    "vision": "我们的愿景",
+    "visionText": "通过人工智能和游戏化叙事使早期学习民主化",
+    "scope": "我们的范围",
+    "scopeText": "我们通过互动式人工智能导师、引人入胜的测验和个性化学习体验，让孩子们能够学习，让每个人都能轻松愉快地接受教育。",
+    "rights": "版权所有"
+  },
+  "dashboard": {
+    "title": "学习仪表板",
+    "familyName": "家庭",
+    "welcome": "欢迎回来",
+    "addChild": "添加新学习者",
+    "startLearning": "开始学习",
+    "points": "积分",
+    "badges": "徽章",
+    "recentBadges": "最近徽章",
+    "noBadges": "还没有徽章"
+  },
+  "learn": {
+    "backToDashboard": "返回仪表板",
+    "learningAdventure": "学习冒险",
+    "age": "年龄",
+    "points": "积分",
+    "badges": "徽章",
+    "lessons": "课程",
+    "aiTutor": "AI导师",
+    "aiTutorDesc": "提问并学习任何东西",
+    "chatNow": "立即聊天",
+    "quizes": "测验",
+    "quizesDesc": "测试您对各种主题的知识",
+    "takeQuiz": "参加测验",
+    "certificates": "证书",
+    "certificatesDesc": "查看和下载成就",
+    "viewAll": "查看全部"
+  },
+  "common": {
+    "loading": "加载中",
+    "notFound": "未找到"
+  }
+}

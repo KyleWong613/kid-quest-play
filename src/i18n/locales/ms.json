@@ -1,0 +1,45 @@
+{
+  "header": {
+    "language": "Bahasa"
+  },
+  "footer": {
+    "about": "Tentang",
+    "vision": "Visi Kami",
+    "visionText": "Mendemokrasikan pembelajaran awal melalui AI dan penceritaan gamifikasi",
+    "scope": "Skop Kami",
+    "scopeText": "Kami memperkasakan kanak-kanak untuk belajar melalui tutor AI interaktif, kuiz menarik, dan pengalaman pembelajaran peribadi yang menjadikan pendidikan mudah diakses dan menyeronokkan untuk semua orang.",
+    "rights": "Hak cipta terpelihara"
+  },
+  "dashboard": {
+    "title": "Papan Pemuka Pembelajaran",
+    "familyName": "Keluarga",
+    "welcome": "Selamat kembali",
+    "addChild": "Tambah Pelajar Baru",
+    "startLearning": "Mula Belajar",
+    "points": "Mata",
+    "badges": "Lencana",
+    "recentBadges": "Lencana Terkini",
+    "noBadges": "Tiada lencana lagi"
+  },
+  "learn": {
+    "backToDashboard": "Kembali ke Papan Pemuka",
+    "learningAdventure": "Pengembaraan Pembelajaran",
+    "age": "Umur",
+    "points": "Mata",
+    "badges": "Lencana",
+    "lessons": "Pelajaran",
+    "aiTutor": "Tutor AI",
+    "aiTutorDesc": "Tanya soalan dan belajar apa sahaja",
+    "chatNow": "Sembang Sekarang",
+    "quizes": "Kuiz",
+    "quizesDesc": "Uji pengetahuan anda dalam pelbagai topik",
+    "takeQuiz": "Ambil Kuiz",
+    "certificates": "Sijil",
+    "certificatesDesc": "Lihat dan muat turun pencapaian",
+    "viewAll": "Lihat Semua"
+  },
+  "common": {
+    "loading": "Memuatkan",
+    "notFound": "Tidak dijumpai"
+  }
+}

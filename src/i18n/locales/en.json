@@ -1,0 +1,45 @@
+{
+  "header": {
+    "language": "Language"
+  },
+  "footer": {
+    "about": "About",
+    "vision": "Our Vision",
+    "visionText": "Democratizing early learning through AI and gamified storytelling",
+    "scope": "Our Scope",
+    "scopeText": "We empower children to learn through interactive AI tutors, engaging quizzes, and personalized learning experiences that make education accessible and fun for everyone.",
+    "rights": "All rights reserved"
+  },
+  "dashboard": {
+    "title": "Learning Dashboard",
+    "familyName": "Family",
+    "welcome": "Welcome back",
+    "addChild": "Add New Learner",
+    "startLearning": "Start Learning",
+    "points": "Points",
+    "badges": "Badges",
+    "recentBadges": "Recent Badges",
+    "noBadges": "No badges yet"
+  },
+  "learn": {
+    "backToDashboard": "Back to Dashboard",
+    "learningAdventure": "Learning Adventure",
+    "age": "Age",
+    "points": "Points",
+    "badges": "Badges",
+    "lessons": "Lessons",
+    "aiTutor": "AI Tutor",
+    "aiTutorDesc": "Ask questions and learn anything",
+    "chatNow": "Chat Now",
+    "quizes": "Quizes",
+    "quizesDesc": "Test your knowledge on various topics",
+    "takeQuiz": "Take Quiz",
+    "certificates": "Certificates",
+    "certificatesDesc": "View and download achievements",
+    "viewAll": "View All"
+  },
+  "common": {
+    "loading": "Loading",
+    "notFound": "Not found"
+  }
+}
