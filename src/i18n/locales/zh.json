@@ -3,27 +3,42 @@
     "language": "语言"
   },
   "footer": {
-    "about": "关于",
+    "about": "关于我们",
     "vision": "我们的愿景",
     "visionText": "通过人工智能和游戏化叙事使早期学习民主化",
     "scope": "我们的范围",
     "scopeText": "我们通过互动式人工智能导师、引人入胜的测验和个性化学习体验，让孩子们能够学习，让每个人都能轻松愉快地接受教育。",
     "rights": "版权所有"
   },
+  "about": {
+    "title": "关于我们",
+    "back": "返回",
+    "whyDifferent": "为什么我们与众不同",
+    "aiPowered": "人工智能驱动的个性化学习体验",
+    "gamified": "使学习变得有趣的游戏化叙事",
+    "multiLanguage": "多语言支持，方便全球访问",
+    "rewards": "奖励和证书激励学习者"
+  },
   "dashboard": {
-    "title": "学习仪表板",
-    "familyName": "家庭",
-    "welcome": "欢迎回来",
-    "addChild": "添加新学习者",
+    "welcomeBack": "欢迎回来！🎉",
+    "chooselearner": "选择学习者继续冒险",
+    "signOut": "退出",
+    "age": "年龄",
     "startLearning": "开始学习",
-    "points": "积分",
-    "badges": "徽章",
-    "recentBadges": "最近徽章",
-    "noBadges": "还没有徽章"
+    "addLearner": "添加新学习者",
+    "createProfile": "创建个人资料开始",
+    "parentDashboard": "家长仪表板",
+    "viewProgress": "从学习页面查看每个学习者的详细进度、徽章和证书。",
+    "totalLearners": "学习者总数",
+    "activeAdventures": "活跃冒险",
+    "badgesEarned": "获得徽章",
+    "recentBadges": "最近徽章 🏆",
+    "loading": "加载中...",
+    "failedToLoad": "加载个人资料失败"
   },
   "learn": {
     "backToDashboard": "返回仪表板",
-    "learningAdventure": "学习冒险",
+    "learningAdventure": "的学习冒险",
     "age": "年龄",
     "points": "积分",
     "badges": "徽章",
@@ -38,8 +53,39 @@
     "certificatesDesc": "查看和下载成就",
     "viewAll": "查看全部"
   },
+  "quizes": {
+    "backToLearning": "返回学习",
+    "quizHub": "的测验中心",
+    "chooseTopics": "选择一个主题来测试您的知识！",
+    "math": "数学",
+    "mathDesc": "通过有趣的问题测试您的数学技能",
+    "startMathQuiz": "开始数学测验",
+    "language": "语言",
+    "languageDesc": "掌握多种语言",
+    "startLanguageQuiz": "开始语言测验",
+    "history": "历史",
+    "historyDesc": "探索过去的事件",
+    "science": "科学",
+    "scienceDesc": "发现科学的奇迹",
+    "arts": "艺术",
+    "artsDesc": "探索创造力和文化",
+    "geography": "地理",
+    "geographyDesc": "了解我们的世界",
+    "comingSoon": "即将推出"
+  },
+  "aiTutor": {
+    "back": "返回",
+    "tutorFor": "AI导师为",
+    "askAnything": "问我任何问题！我在这里帮助你学习 🚀",
+    "whatLearning": "我们今天学什么？",
+    "placeholder": "例如：数学、科学、阅读...",
+    "aiTutor": "AI导师",
+    "askQuestion": "提出您的问题...",
+    "voiceComingSoon": "语音功能即将推出！🎤"
+  },
   "common": {
     "loading": "加载中",
-    "notFound": "未找到"
+    "notFound": "未找到",
+    "learnerNotFound": "学习者未找到"
   }
 }

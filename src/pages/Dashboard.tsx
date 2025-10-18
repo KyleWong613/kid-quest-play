@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -23,6 +24,7 @@ interface Badge {
 
 const Dashboard = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const [children, setChildren] = useState<Child[]>([]);
   const [badges, setBadges] = useState<Badge[]>([]);
   const [loading, setLoading] = useState(true);
@@ -52,7 +54,7 @@ const Dashboard = () => {
       setChildren(data || []);
     } catch (error) {
       console.error("Error fetching children:", error);
-      toast.error("Failed to load profiles");
+      toast.error(t('dashboard.failedToLoad'));
     } finally {
       setLoading(false);
     }
@@ -106,7 +108,7 @@ const Dashboard = () => {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center gradient-primary">
-        <div className="text-white text-2xl animate-pulse">Loading...</div>
+        <div className="text-white text-2xl animate-pulse">{t('dashboard.loading')}</div>
       </div>
     );
   }
@@ -117,9 +119,9 @@ const Dashboard = () => {
         <div className="flex justify-between items-center mb-8">
           <div>
             <h1 className="text-4xl md:text-5xl font-black text-white mb-2 animate-fade-in">
-              Welcome Back! 🎉
+              {t('dashboard.welcomeBack')}
             </h1>
-            <p className="text-xl text-white/90">Choose a learner to continue the adventure</p>
+            <p className="text-xl text-white/90">{t('dashboard.chooselearner')}</p>
           </div>
           <Button
             onClick={handleSignOut}
@@ -127,7 +129,7 @@ const Dashboard = () => {
             className="rounded-full hover:scale-105 transition-bounce"
           >
             <LogOut className="mr-2 h-4 w-4" />
-            Sign Out
+            {t('dashboard.signOut')}
           </Button>
         </div>
 
@@ -142,9 +144,9 @@ const Dashboard = () => {
               <div className="text-center">
                 <div className="text-6xl mb-4 animate-float">{getMascotEmoji(child.mascot_id)}</div>
                 <h3 className="text-2xl font-bold text-foreground mb-1">{child.name}</h3>
-                <p className="text-muted-foreground">Age {child.age}</p>
+                <p className="text-muted-foreground">{t('dashboard.age')} {child.age}</p>
                 <Button className="mt-4 w-full gradient-primary text-white border-0 hover:shadow-glow transition-all">
-                  Start Learning
+                  {t('dashboard.startLearning')}
                 </Button>
               </div>
             </Card>
@@ -159,8 +161,8 @@ const Dashboard = () => {
               <div className="w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center mb-4">
                 <Plus className="w-8 h-8 text-primary" />
               </div>
-              <h3 className="text-xl font-bold text-foreground mb-1">Add New Learner</h3>
-              <p className="text-sm text-muted-foreground">Create a profile to get started</p>
+              <h3 className="text-xl font-bold text-foreground mb-1">{t('dashboard.addLearner')}</h3>
+              <p className="text-sm text-muted-foreground">{t('dashboard.createProfile')}</p>
             </div>
           </Card>
         </div>
@@ -168,22 +170,22 @@ const Dashboard = () => {
         <Card className="p-6 bg-white/80 backdrop-blur-sm shadow-card border-0">
           <div className="flex items-center gap-3 mb-4">
             <User className="w-6 h-6 text-primary" />
-            <h2 className="text-2xl font-bold text-foreground">Parent Dashboard</h2>
+            <h2 className="text-2xl font-bold text-foreground">{t('dashboard.parentDashboard')}</h2>
           </div>
           <p className="text-muted-foreground mb-4">
-            View detailed progress, badges, and certificates for each learner from their learning page.
+            {t('dashboard.viewProgress')}
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="p-4 rounded-2xl bg-primary/10">
-              <p className="text-sm text-primary font-semibold mb-1">Total Learners</p>
+              <p className="text-sm text-primary font-semibold mb-1">{t('dashboard.totalLearners')}</p>
               <p className="text-3xl font-black text-primary">{children.length}</p>
             </div>
             <div className="p-4 rounded-2xl bg-success/10">
-              <p className="text-sm text-success font-semibold mb-1">Active Adventures</p>
+              <p className="text-sm text-success font-semibold mb-1">{t('dashboard.activeAdventures')}</p>
               <p className="text-3xl font-black text-success">{children.length > 0 ? "🚀" : "—"}</p>
             </div>
             <div className="p-4 rounded-2xl bg-fun/10">
-              <p className="text-sm text-fun font-semibold mb-1">Badges Earned</p>
+              <p className="text-sm text-fun font-semibold mb-1">{t('dashboard.badgesEarned')}</p>
               <p className="text-3xl font-black text-fun">{badges.length} 🎖️</p>
             </div>
           </div>
@@ -192,7 +194,7 @@ const Dashboard = () => {
 
       {badges.length > 0 && (
         <Card className="mt-6 p-6 bg-white/80 backdrop-blur-sm shadow-card border-0">
-          <h2 className="text-2xl font-bold text-foreground mb-4">Recent Badges 🏆</h2>
+          <h2 className="text-2xl font-bold text-foreground mb-4">{t('dashboard.recentBadges')}</h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {badges.slice(0, 8).map((badge) => (
               <div key={badge.id} className="p-4 rounded-2xl bg-gradient-to-br from-primary/10 to-fun/10 text-center">

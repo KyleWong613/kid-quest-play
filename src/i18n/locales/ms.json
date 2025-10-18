@@ -3,27 +3,42 @@
     "language": "Bahasa"
   },
   "footer": {
-    "about": "Tentang",
+    "about": "Tentang Kami",
     "vision": "Visi Kami",
     "visionText": "Mendemokrasikan pembelajaran awal melalui AI dan penceritaan gamifikasi",
     "scope": "Skop Kami",
     "scopeText": "Kami memperkasakan kanak-kanak untuk belajar melalui tutor AI interaktif, kuiz menarik, dan pengalaman pembelajaran peribadi yang menjadikan pendidikan mudah diakses dan menyeronokkan untuk semua orang.",
     "rights": "Hak cipta terpelihara"
   },
+  "about": {
+    "title": "Tentang Kami",
+    "back": "Kembali",
+    "whyDifferent": "Mengapa Kami Berbeza",
+    "aiPowered": "Pengalaman pembelajaran peribadi berkuasa AI",
+    "gamified": "Penceritaan gamifikasi yang menjadikan pembelajaran menyeronokkan",
+    "multiLanguage": "Sokongan pelbagai bahasa untuk capaian global",
+    "rewards": "Ganjaran dan sijil untuk memotivasikan pelajar"
+  },
   "dashboard": {
-    "title": "Papan Pemuka Pembelajaran",
-    "familyName": "Keluarga",
-    "welcome": "Selamat kembali",
-    "addChild": "Tambah Pelajar Baru",
+    "welcomeBack": "Selamat Kembali! 🎉",
+    "chooselearner": "Pilih pelajar untuk meneruskan pengembaraan",
+    "signOut": "Log Keluar",
+    "age": "Umur",
     "startLearning": "Mula Belajar",
-    "points": "Mata",
-    "badges": "Lencana",
-    "recentBadges": "Lencana Terkini",
-    "noBadges": "Tiada lencana lagi"
+    "addLearner": "Tambah Pelajar Baru",
+    "createProfile": "Cipta profil untuk bermula",
+    "parentDashboard": "Papan Pemuka Ibu Bapa",
+    "viewProgress": "Lihat kemajuan terperinci, lencana, dan sijil untuk setiap pelajar dari halaman pembelajaran mereka.",
+    "totalLearners": "Jumlah Pelajar",
+    "activeAdventures": "Pengembaraan Aktif",
+    "badgesEarned": "Lencana Diperoleh",
+    "recentBadges": "Lencana Terkini 🏆",
+    "loading": "Memuatkan...",
+    "failedToLoad": "Gagal memuatkan profil"
   },
   "learn": {
     "backToDashboard": "Kembali ke Papan Pemuka",
-    "learningAdventure": "Pengembaraan Pembelajaran",
+    "learningAdventure": " Pengembaraan Pembelajaran",
     "age": "Umur",
     "points": "Mata",
     "badges": "Lencana",
@@ -38,8 +53,39 @@
     "certificatesDesc": "Lihat dan muat turun pencapaian",
     "viewAll": "Lihat Semua"
   },
+  "quizes": {
+    "backToLearning": "Kembali ke Pembelajaran",
+    "quizHub": " Hab Kuiz",
+    "chooseTopics": "Pilih topik untuk menguji pengetahuan anda!",
+    "math": "Matematik",
+    "mathDesc": "Uji kemahiran matematik anda dengan masalah yang menyeronokkan",
+    "startMathQuiz": "Mula Kuiz Matematik",
+    "language": "Bahasa",
+    "languageDesc": "Kuasai pelbagai bahasa",
+    "startLanguageQuiz": "Mula Kuiz Bahasa",
+    "history": "Sejarah",
+    "historyDesc": "Terokai peristiwa dari masa lalu",
+    "science": "Sains",
+    "scienceDesc": "Temui keajaiban sains",
+    "arts": "Seni",
+    "artsDesc": "Terokai kreativiti dan budaya",
+    "geography": "Geografi",
+    "geographyDesc": "Belajar tentang dunia kita",
+    "comingSoon": "Akan Datang"
+  },
+  "aiTutor": {
+    "back": "Kembali",
+    "tutorFor": "Tutor AI untuk",
+    "askAnything": "Tanya apa sahaja! Saya di sini untuk membantu anda belajar 🚀",
+    "whatLearning": "Apa yang kita belajar hari ini?",
+    "placeholder": "contoh: Matematik, Sains, Membaca...",
+    "aiTutor": "Tutor AI",
+    "askQuestion": "Tanya soalan anda...",
+    "voiceComingSoon": "Ciri suara akan datang! 🎤"
+  },
   "common": {
     "loading": "Memuatkan",
-    "notFound": "Tidak dijumpai"
+    "notFound": "Tidak dijumpai",
+    "learnerNotFound": "Pelajar tidak dijumpai"
   }
 }

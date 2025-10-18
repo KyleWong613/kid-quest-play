@@ -3,27 +3,42 @@
     "language": "Language"
   },
   "footer": {
-    "about": "About",
+    "about": "About Us",
     "vision": "Our Vision",
     "visionText": "Democratizing early learning through AI and gamified storytelling",
     "scope": "Our Scope",
     "scopeText": "We empower children to learn through interactive AI tutors, engaging quizzes, and personalized learning experiences that make education accessible and fun for everyone.",
     "rights": "All rights reserved"
   },
+  "about": {
+    "title": "About Us",
+    "back": "Back",
+    "whyDifferent": "Why We're Different",
+    "aiPowered": "AI-powered personalized learning experiences",
+    "gamified": "Gamified storytelling that makes learning fun",
+    "multiLanguage": "Multi-language support for global accessibility",
+    "rewards": "Rewards and certificates to motivate learners"
+  },
   "dashboard": {
-    "title": "Learning Dashboard",
-    "familyName": "Family",
-    "welcome": "Welcome back",
-    "addChild": "Add New Learner",
+    "welcomeBack": "Welcome Back! 🎉",
+    "chooselearner": "Choose a learner to continue the adventure",
+    "signOut": "Sign Out",
+    "age": "Age",
     "startLearning": "Start Learning",
-    "points": "Points",
-    "badges": "Badges",
-    "recentBadges": "Recent Badges",
-    "noBadges": "No badges yet"
+    "addLearner": "Add New Learner",
+    "createProfile": "Create a profile to get started",
+    "parentDashboard": "Parent Dashboard",
+    "viewProgress": "View detailed progress, badges, and certificates for each learner from their learning page.",
+    "totalLearners": "Total Learners",
+    "activeAdventures": "Active Adventures",
+    "badgesEarned": "Badges Earned",
+    "recentBadges": "Recent Badges 🏆",
+    "loading": "Loading...",
+    "failedToLoad": "Failed to load profiles"
   },
   "learn": {
     "backToDashboard": "Back to Dashboard",
-    "learningAdventure": "Learning Adventure",
+    "learningAdventure": "'s Learning Adventure",
     "age": "Age",
     "points": "Points",
     "badges": "Badges",
@@ -38,8 +53,39 @@
     "certificatesDesc": "View and download achievements",
     "viewAll": "View All"
   },
+  "quizes": {
+    "backToLearning": "Back to Learning",
+    "quizHub": "'s Quiz Hub",
+    "chooseTopics": "Choose a topic to test your knowledge!",
+    "math": "Math",
+    "mathDesc": "Test your math skills with fun problems",
+    "startMathQuiz": "Start Math Quiz",
+    "language": "Language",
+    "languageDesc": "Master multiple languages",
+    "startLanguageQuiz": "Start Language Quiz",
+    "history": "History",
+    "historyDesc": "Explore events from the past",
+    "science": "Science",
+    "scienceDesc": "Discover the wonders of science",
+    "arts": "Arts",
+    "artsDesc": "Explore creativity and culture",
+    "geography": "Geography",
+    "geographyDesc": "Learn about our world",
+    "comingSoon": "Coming Soon"
+  },
+  "aiTutor": {
+    "back": "Back",
+    "tutorFor": "AI Tutor for",
+    "askAnything": "Ask me anything! I'm here to help you learn 🚀",
+    "whatLearning": "What are we learning today?",
+    "placeholder": "e.g., Math, Science, Reading...",
+    "aiTutor": "AI Tutor",
+    "askQuestion": "Ask your question...",
+    "voiceComingSoon": "Voice feature coming soon! 🎤"
+  },
   "common": {
     "loading": "Loading",
-    "notFound": "Not found"
+    "notFound": "Not found",
+    "learnerNotFound": "Learner not found"
   }
 }
