@@ -151,6 +151,21 @@ const Learn = () => {
           <Card 
             className="p-8 hover:scale-105 transition-bounce shadow-card border-0 cursor-pointer animate-fade-in" 
             style={{ animationDelay: "0.1s" }}
+            onClick={() => navigate(`/math-games/${childId}`)}
+          >
+            <div className="text-center">
+              <div className="text-5xl mb-4">🧮</div>
+              <h3 className="text-2xl font-bold text-foreground mb-2">Math Games</h3>
+              <p className="text-muted-foreground mb-4">Solve puzzles and challenges</p>
+              <Button className="w-full gradient-fun text-white border-0 hover:shadow-glow transition-all">
+                Play Now
+              </Button>
+            </div>
+          </Card>
+
+          <Card 
+            className="p-8 hover:scale-105 transition-bounce shadow-card border-0 cursor-pointer animate-fade-in" 
+            style={{ animationDelay: "0.2s" }}
             onClick={() => navigate(`/certificates/${childId}`)}
           >
             <div className="text-center">
@@ -162,30 +177,7 @@ const Learn = () => {
               </Button>
             </div>
           </Card>
-
-          <Card className="p-8 hover:scale-105 transition-bounce shadow-card border-0 cursor-pointer animate-fade-in" style={{ animationDelay: "0.2s" }}>
-            <div className="text-center">
-              <div className="text-5xl mb-4">📚</div>
-              <h3 className="text-2xl font-bold text-foreground mb-2">Story Time</h3>
-              <p className="text-muted-foreground mb-4">Learn through magical stories</p>
-              <Button className="w-full gradient-fun text-white border-0">
-                Coming Soon
-              </Button>
-            </div>
-          </Card>
         </div>
-
-        <Card className="mt-8 p-8 bg-white/80 backdrop-blur-sm shadow-card border-0 animate-fade-in" style={{ animationDelay: "0.3s" }}>
-          <h2 className="text-3xl font-bold text-foreground mb-4">More Coming Soon! 🎮</h2>
-          <p className="text-lg text-muted-foreground mb-4">
-            We're working hard to bring you interactive lessons, voice-guided stories, and more exciting features. Stay tuned for the adventure!
-          </p>
-          <div className="flex flex-wrap gap-2">
-            <span className="px-4 py-2 rounded-full bg-primary/10 text-primary font-semibold text-sm">Voice Stories</span>
-            <span className="px-4 py-2 rounded-full bg-secondary/10 text-secondary font-semibold text-sm">Math Games</span>
-            <span className="px-4 py-2 rounded-full bg-fun/10 text-fun font-semibold text-sm">Leaderboards</span>
-          </div>
-        </Card>
       </div>
     </div>
   );
