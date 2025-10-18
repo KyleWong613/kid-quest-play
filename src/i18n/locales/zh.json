@@ -2,6 +2,9 @@
   "header": {
     "language": "语言"
   },
+  "auth": {
+    "signIn": "登录"
+  },
   "footer": {
     "about": "关于我们",
     "vision": "我们的愿景",
@@ -87,5 +90,18 @@
     "loading": "加载中",
     "notFound": "未找到",
     "learnerNotFound": "学习者未找到"
+  },
+  "contact": {
+    "title": "联系我们",
+    "subtitle": "我们很乐意听到您的声音！给我们发送消息，我们会尽快回复。",
+    "name": "姓名",
+    "namePlaceholder": "您的姓名",
+    "email": "电子邮件",
+    "emailPlaceholder": "your.email@example.com",
+    "message": "消息",
+    "messagePlaceholder": "告诉我们如何帮助您...",
+    "send": "发送消息",
+    "messageSent": "谢谢！我们会尽快回复您。",
+    "alternative": "或直接发送电子邮件至："
   }
 }

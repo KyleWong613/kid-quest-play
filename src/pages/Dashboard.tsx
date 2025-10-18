@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Plus, LogOut, User } from "lucide-react";
+import { Plus, User } from "lucide-react";
 import { toast } from "sonner";
 import CreateChildDialog from "@/components/CreateChildDialog";
 
@@ -74,11 +74,6 @@ const Dashboard = () => {
     }
   };
 
-  const handleSignOut = async () => {
-    await supabase.auth.signOut();
-    navigate("/");
-  };
-
   const handleChildSelect = (childId: string) => {
     navigate(`/learn/${childId}`);
   };
@@ -123,14 +118,6 @@ const Dashboard = () => {
             </h1>
             <p className="text-xl text-white/90">{t('dashboard.chooselearner')}</p>
           </div>
-          <Button
-            onClick={handleSignOut}
-            variant="secondary"
-            className="rounded-full hover:scale-105 transition-bounce"
-          >
-            <LogOut className="mr-2 h-4 w-4" />
-            {t('dashboard.signOut')}
-          </Button>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">

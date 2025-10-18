@@ -12,12 +12,20 @@ const Footer = () => {
             © {new Date().getFullYear()} AI Learning Platform. {t('footer.rights')}.
           </p>
           
-          <Link 
-            to="/about" 
-            className="text-white hover:text-white/80 transition-colors font-medium"
-          >
-            {t('footer.about')}
-          </Link>
+          <div className="flex gap-6">
+            <Link 
+              to="/about" 
+              className="text-white hover:text-white/80 transition-colors font-medium"
+            >
+              {t('footer.about')}
+            </Link>
+            <Link 
+              to="/contact" 
+              className="text-white hover:text-white/80 transition-colors font-medium"
+            >
+              {t('contact.title')}
+            </Link>
+          </div>
         </div>
       </div>
     </footer>
@@ -25,3 +33,4 @@ const Footer = () => {
 };
 
 export default Footer;
+

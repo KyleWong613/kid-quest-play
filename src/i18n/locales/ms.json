@@ -2,6 +2,9 @@
   "header": {
     "language": "Bahasa"
   },
+  "auth": {
+    "signIn": "Log Masuk"
+  },
   "footer": {
     "about": "Tentang Kami",
     "vision": "Visi Kami",
@@ -87,5 +90,18 @@
     "loading": "Memuatkan",
     "notFound": "Tidak dijumpai",
     "learnerNotFound": "Pelajar tidak dijumpai"
+  },
+  "contact": {
+    "title": "Hubungi Kami",
+    "subtitle": "Kami ingin mendengar daripada anda! Hantar mesej kepada kami dan kami akan membalas secepat mungkin.",
+    "name": "Nama",
+    "namePlaceholder": "Nama anda",
+    "email": "E-mel",
+    "emailPlaceholder": "emel.anda@contoh.com",
+    "message": "Mesej",
+    "messagePlaceholder": "Beritahu kami bagaimana kami boleh membantu...",
+    "send": "Hantar Mesej",
+    "messageSent": "Terima kasih! Kami akan menghubungi anda tidak lama lagi.",
+    "alternative": "Atau e-melkan kami terus di:"
   }
 }
