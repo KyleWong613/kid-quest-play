@@ -4,7 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { ArrowLeft, Send, Sparkles } from "lucide-react";
+import { ArrowLeft, Send, Sparkles, Mic } from "lucide-react";
 import { toast } from "sonner";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
@@ -262,6 +262,13 @@ const AITutor = () => {
                 className="rounded-full flex-1"
                 disabled={loading}
               />
+              <Button
+                type="button"
+                onClick={() => toast.info("Voice feature coming soon! 🎤")}
+                className="rounded-full gradient-fun text-white border-0 hover:shadow-glow transition-all"
+              >
+                <Mic className="w-4 h-4" />
+              </Button>
               <Button
                 type="submit"
                 disabled={loading || !input.trim()}

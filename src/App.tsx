@@ -11,6 +11,7 @@ import AITutor from "./pages/AITutor";
 import MathGames from "./pages/MathGames";
 import Certificates from "./pages/Certificates";
 import LanguageLearning from "./pages/LanguageLearning";
+import Quizes from "./pages/Quizes";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -29,6 +30,7 @@ const App = () => (
           <Route path="/ai-tutor/:childId" element={<AITutor />} />
           <Route path="/math-games/:childId" element={<MathGames />} />
           <Route path="/language-learning/:childId" element={<LanguageLearning />} />
+          <Route path="/quizes/:childId" element={<Quizes />} />
           <Route path="/certificates/:childId" element={<Certificates />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

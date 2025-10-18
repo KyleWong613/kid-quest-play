@@ -151,29 +151,14 @@ const Learn = () => {
           <Card 
             className="p-8 hover:scale-105 transition-bounce shadow-card border-0 cursor-pointer animate-fade-in" 
             style={{ animationDelay: "0.1s" }}
-            onClick={() => navigate(`/math-games/${childId}`)}
+            onClick={() => navigate(`/quizes/${childId}`)}
           >
             <div className="text-center">
-              <div className="text-5xl mb-4">🧮</div>
-              <h3 className="text-2xl font-bold text-foreground mb-2">Math Games</h3>
-              <p className="text-muted-foreground mb-4">Solve puzzles and challenges</p>
+              <div className="text-5xl mb-4">📝</div>
+              <h3 className="text-2xl font-bold text-foreground mb-2">Quizes</h3>
+              <p className="text-muted-foreground mb-4">Test your knowledge on various topics</p>
               <Button className="w-full gradient-fun text-white border-0 hover:shadow-glow transition-all">
-                Play Now
-              </Button>
-            </div>
-          </Card>
-
-          <Card 
-            className="p-8 hover:scale-105 transition-bounce shadow-card border-0 cursor-pointer animate-fade-in" 
-            style={{ animationDelay: "0.2s" }}
-            onClick={() => navigate(`/language-learning/${childId}`)}
-          >
-            <div className="text-center">
-              <div className="text-5xl mb-4">🌍</div>
-              <h3 className="text-2xl font-bold text-foreground mb-2">Language Learning</h3>
-              <p className="text-muted-foreground mb-4">Master multiple languages</p>
-              <Button className="w-full gradient-primary text-white border-0 hover:shadow-glow transition-all">
-                Start Learning
+                Take Quiz
               </Button>
             </div>
           </Card>
