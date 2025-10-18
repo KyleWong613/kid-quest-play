@@ -28,6 +28,7 @@ interface Badge {
   badge_name: string;
   badge_type: string;
   earned_at: string;
+  child_id: string;
 }
 
 const Dashboard = () => {
@@ -35,6 +36,7 @@ const Dashboard = () => {
   const { t } = useTranslation();
   const [children, setChildren] = useState<Child[]>([]);
   const [badges, setBadges] = useState<Badge[]>([]);
+  const [badgesByChild, setBadgesByChild] = useState<Record<string, number>>({});
   const [loading, setLoading] = useState(true);
   const [showCreateDialog, setShowCreateDialog] = useState(false);
   const [selectedChildForCalendar, setSelectedChildForCalendar] = useState<string>("");
@@ -78,6 +80,13 @@ const Dashboard = () => {
 
       if (error) throw error;
       setBadges(data || []);
+      
+      // Group badges by child_id
+      const badgeCounts: Record<string, number> = {};
+      (data || []).forEach((badge) => {
+        badgeCounts[badge.child_id] = (badgeCounts[badge.child_id] || 0) + 1;
+      });
+      setBadgesByChild(badgeCounts);
     } catch (error) {
       console.error("Error fetching badges:", error);
     }
@@ -140,7 +149,13 @@ const Dashboard = () => {
               <div className="text-center">
                 <div className="text-6xl mb-4 animate-float">{getMascotEmoji(child.mascot_id)}</div>
                 <h3 className="text-2xl font-bold text-foreground mb-1">{child.name}</h3>
-                <p className="text-muted-foreground">{t('dashboard.age')} {child.age}</p>
+                <p className="text-muted-foreground mb-2">{t('dashboard.age')} {child.age}</p>
+                <div className="flex items-center justify-center gap-2 mb-3 p-2 rounded-lg bg-fun/10">
+                  <span className="text-2xl">🎖️</span>
+                  <span className="text-lg font-bold text-fun">
+                    {badgesByChild[child.id] || 0} {badgesByChild[child.id] === 1 ? 'Badge' : 'Badges'}
+                  </span>
+                </div>
                 <Button className="mt-4 w-full gradient-primary text-white border-0 hover:shadow-glow transition-all">
                   {t('dashboard.startLearning')}
                 </Button>
@@ -183,6 +198,16 @@ const Dashboard = () => {
             <div className="p-4 rounded-2xl bg-fun/10">
               <p className="text-sm text-fun font-semibold mb-1">{t('dashboard.badgesEarned')}</p>
               <p className="text-3xl font-black text-fun">{badges.length} 🎖️</p>
+              <div className="mt-2 space-y-1">
+                {children.map((child) => (
+                  <div key={child.id} className="flex items-center justify-between text-xs">
+                    <span className="text-muted-foreground">
+                      {getMascotEmoji(child.mascot_id)} {child.name}
+                    </span>
+                    <span className="font-bold text-fun">{badgesByChild[child.id] || 0}</span>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </Card>
