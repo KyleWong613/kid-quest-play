@@ -174,7 +174,8 @@ const MathGames = () => {
     setQuestionsAnswered(prev => prev + 1);
 
     if (isCorrect) {
-      setScore(prev => prev + 10);
+      const newScore = score + 10;
+      setScore(newScore);
       setStreak(prev => prev + 1);
       setFeedback("🎉 Correct! Amazing work!");
       
@@ -187,7 +188,7 @@ const MathGames = () => {
       ];
       toast.success(feedbacks[Math.floor(Math.random() * feedbacks.length)]);
 
-      // Update points
+      // Update points and award badge for 10 correct answers
       try {
         const { data: pointsData } = await supabase
           .from("points")
@@ -200,6 +201,21 @@ const MathGames = () => {
             .from("points")
             .update({ total_points: pointsData.total_points + 10 })
             .eq("child_id", childId);
+        }
+
+        // Award Fast Learner certificate badge after 10 correct answers
+        if (newScore === 100) {
+          const { error: badgeError } = await supabase
+            .from("badges")
+            .insert({
+              child_id: childId,
+              badge_name: "Fast Learner",
+              badge_type: "certificate"
+            });
+
+          if (!badgeError) {
+            toast.success("🏆 Certificate Earned: Fast Learner!");
+          }
         }
       } catch (error) {
         console.error("Error updating points:", error);

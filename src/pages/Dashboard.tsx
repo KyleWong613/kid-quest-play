@@ -14,15 +14,24 @@ interface Child {
   mascot_id: string;
 }
 
+interface Badge {
+  id: string;
+  badge_name: string;
+  badge_type: string;
+  earned_at: string;
+}
+
 const Dashboard = () => {
   const navigate = useNavigate();
   const [children, setChildren] = useState<Child[]>([]);
+  const [badges, setBadges] = useState<Badge[]>([]);
   const [loading, setLoading] = useState(true);
   const [showCreateDialog, setShowCreateDialog] = useState(false);
 
   useEffect(() => {
     checkAuth();
     fetchChildren();
+    fetchBadges();
   }, []);
 
   const checkAuth = async () => {
@@ -49,6 +58,20 @@ const Dashboard = () => {
     }
   };
 
+  const fetchBadges = async () => {
+    try {
+      const { data, error } = await supabase
+        .from("badges")
+        .select("*")
+        .order("earned_at", { ascending: false });
+
+      if (error) throw error;
+      setBadges(data || []);
+    } catch (error) {
+      console.error("Error fetching badges:", error);
+    }
+  };
+
   const handleSignOut = async () => {
     await supabase.auth.signOut();
     navigate("/");
@@ -56,6 +79,16 @@ const Dashboard = () => {
 
   const handleChildSelect = (childId: string) => {
     navigate(`/learn/${childId}`);
+  };
+
+  const getBadgeEmoji = (badgeType: string) => {
+    const types: { [key: string]: string } = {
+      certificate: "🏆",
+      achievement: "⭐",
+      milestone: "🎯",
+      special: "💎",
+    };
+    return types[badgeType] || "🎖️";
   };
 
   const getMascotEmoji = (mascotId: string) => {
@@ -150,17 +183,34 @@ const Dashboard = () => {
               <p className="text-3xl font-black text-success">{children.length > 0 ? "🚀" : "—"}</p>
             </div>
             <div className="p-4 rounded-2xl bg-fun/10">
-              <p className="text-sm text-fun font-semibold mb-1">Achievements</p>
-              <p className="text-3xl font-black text-fun">Coming Soon!</p>
+              <p className="text-sm text-fun font-semibold mb-1">Badges Earned</p>
+              <p className="text-3xl font-black text-fun">{badges.length} 🎖️</p>
             </div>
           </div>
         </Card>
       </div>
 
+      {badges.length > 0 && (
+        <Card className="mt-6 p-6 bg-white/80 backdrop-blur-sm shadow-card border-0">
+          <h2 className="text-2xl font-bold text-foreground mb-4">Recent Badges 🏆</h2>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {badges.slice(0, 8).map((badge) => (
+              <div key={badge.id} className="p-4 rounded-2xl bg-gradient-to-br from-primary/10 to-fun/10 text-center">
+                <div className="text-4xl mb-2">{getBadgeEmoji(badge.badge_type)}</div>
+                <p className="text-sm font-bold text-foreground">{badge.badge_name}</p>
+              </div>
+            ))}
+          </div>
+        </Card>
+      )}
+
       <CreateChildDialog
         open={showCreateDialog}
         onOpenChange={setShowCreateDialog}
-        onChildCreated={fetchChildren}
+        onChildCreated={() => {
+          fetchChildren();
+          fetchBadges();
+        }}
       />
     </div>
   );
